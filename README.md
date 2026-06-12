@@ -6,6 +6,8 @@ check it off**. Built for an [Obsidian](https://obsidian.md/) workflow (it under
 [Tasks plugin](https://publish.obsidian.md/tasks/) due-date syntax), but it works with any
 plain Markdown file that uses `- [ ]` checkboxes.
 
+![The Tasks and Chores widgets on the desktop beside their source Markdown open in Obsidian — clicking a row checks the task off and it disappears](docs/demo.gif)
+
 - **Tasks** widget — reads the `### Tasks` section.
 - **Chores** widget — reads the `### Chores` section (amber title, otherwise identical).
 
