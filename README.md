@@ -91,6 +91,12 @@ and the title text.
   the file).
 - Requires Rainmeter 4.0+ on Windows.
 
+## Credits
+
+The `.rmskin` is built and published automatically on each release with
+[`rmskin-action`](https://github.com/2bndy5/rmskin-action) by
+[2bndy5](https://github.com/2bndy5) — thanks!
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
