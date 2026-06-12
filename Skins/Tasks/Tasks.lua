@@ -119,7 +119,7 @@ function render()
   SKIN:Bang('!Redraw')
 end
 
--- Check off row n: flip its "- [ ]" to "- [x]" in the file, byte-preserving everything else.
+-- Check off row n: flip its "- [ ]" to "- [x]" in the file, leaving the rest untouched.
 function toggle(n)
   n = tonumber(n)
   local t = tasks[n]

@@ -24,9 +24,8 @@ seconds whenever you edit the underlying Markdown in your editor of choice.
   (in your editor, or by clicking the row) and it disappears from the widget.
 - Strips Obsidian Tasks metadata for a clean view: a `📅 2026-06-13` due date is shown as
   `(due Jun 13)`; scheduled/start/done/recurring/priority markers are removed.
-- **Click a row** to flip its `- [ ]` to `- [x]` directly in the file. The edit is
-  byte-precise — only that one checkbox character changes, the rest of the file (including
-  any metadata) is preserved exactly.
+- **Click a row** to flip its `- [ ]` to `- [x]` directly in the file. Only that one
+  checkbox changes — the rest of your file is left alone.
 - The panel auto-sizes to the number of tasks, at any display-scaling (DPI) setting.
 
 ## Install
