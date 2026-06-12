@@ -1,0 +1,26 @@
+name: Release rmskin
+
+# Tag a commit with v* (e.g. v1.0.0) to build the .rmskin and publish a release.
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build .rmskin
+        id: builder
+        uses: 2bndy5/rmskin-action@v2.0.4
+
+      - name: Publish release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >
+          gh release create "${{ github.ref_name }}"
+          "${{ steps.builder.outputs.arc_name }}"
+          --generate-notes
