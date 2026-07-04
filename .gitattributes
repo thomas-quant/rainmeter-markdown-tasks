@@ -1,0 +1,3 @@
+# Rainmeter requires Lua scripts to be UTF-16 LE for correct Unicode handling.
+# Mark them so Git never applies end-of-line/encoding conversion that would corrupt them.
+*.lua -text
