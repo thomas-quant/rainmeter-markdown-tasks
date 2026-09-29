@@ -22,8 +22,11 @@ seconds whenever you edit the underlying Markdown in your editor of choice.
 ## How it works
 
 - Reads your Markdown file every 10 seconds.
-- Shows only **unchecked** items (`- [ ]`) under the configured heading. Check one off
-  (in your editor, or by clicking the row) and it disappears from the widget.
+- Shows only **unchecked** items (`- [ ]`, also `+`/`*` bullets and `1.` lists) under the
+  configured heading, including anything under its sub-headings. Items inside code blocks
+  are ignored. Check one off (in your editor, or by clicking the row) and it disappears
+  from the widget.
+- Links are shown as their label: `[[Note|Alias]]` → `Alias`, `[text](url)` → `text`.
 - Strips Obsidian Tasks metadata for a clean view: a `📅 2026-06-13` due date is shown as
   `(due Jun 13)`; scheduled/start/done/recurring/priority markers are removed.
 - **Click a row** to flip its `- [ ]` to `- [x]` directly in the file. Only that one
@@ -72,12 +75,15 @@ All tunables live in the `[Variables]` block at the top of each `.ini`:
 |--------------|----------------------------------------------------|----------------|
 | `TaskFile`   | Full path to the Markdown file                     | `CONFIGURE`    |
 | `Section`    | Heading to read (`Tasks`, `Chores`, … blank = all) | `Tasks`/`Chores` |
-| `MaxTasks`   | Max rows shown                                     | `15`           |
+| `MaxTasks`   | Max rows shown (capped by `Slots`, see below)      | `15`           |
 | `EmptyText`  | Text shown when nothing is open                    | varies         |
 | `FontName` / `FontSize` / `FontColor` / `HoverColor` | Typography           | Segoe UI / 11  |
 | `BGColor`    | Panel fill `R,G,B,A`                               | `20,20,20,200` |
 | `PanelW`     | Panel width (px)                                   | `340`          |
 | `PadX` / `GapTop` / `Gap` / `PadBottom` | Padding & row spacing (px)      | `16/14/6/16`   |
+
+`Slots` is the number of row meters defined in the `.ini` (15). To show more than 15 rows
+you also have to add `[MeterTaskN]` blocks and point `MeterBG` at the last one.
 
 To make a widget for a different heading, copy one of the folders and change `Section`
 and the title text.
@@ -90,6 +96,20 @@ and the title text.
   a weekly review.
 - More than `MaxTasks` open items in a section: the extras aren't shown (they're still in
   the file).
+- Clicking flips the checkbox only. Unlike ticking it in Obsidian, it does not add a `✅`
+  completion date, and a `🔁` recurring task will not spawn its next occurrence.
+- **Emoji are shown in monochrome.** Emoji in a task's description render (tested on
+  Rainmeter 4.5.26), but as flat glyphs in the text colour, not in colour. That is a
+  limit of Rainmeter's text meter.
+- **`TaskFile` must be an ASCII path.** Rainmeter's Lua cannot open a path containing
+  non-Latin characters (e.g. a Cyrillic folder or user name); the widget then shows
+  "TaskFile path must be ASCII". Workaround: make an ASCII-named junction to the folder
+  (`mklink /J C:\Notes "C:\Users\Иван\Documents\Notes"`) and point `TaskFile` at that.
+  The file's *contents* can be in any language.
+- **Keep the encoding when editing.** The `.lua` and `.ini` files are UTF-16 LE (with BOM),
+  which is what Rainmeter needs to display non-Latin text correctly. If your editor saves
+  them as UTF-8, non-Latin text (in the widget, or in an `EmptyText` you translate) turns
+  into garbage.
 - Requires Rainmeter 4.0+ on Windows.
 
 ## Credits
